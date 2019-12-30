@@ -23,6 +23,12 @@ public class LoginContruller {
         return "login";
     }
 
+    @RequestMapping("/customer/login")
+    public String customerLogin(){
+
+        return "customer/login";
+    }
+
     @RequestMapping(value = "/login2",method = RequestMethod.POST, produces = "application/json;charset=UTF-8")
     @ResponseBody
     public String login2(@RequestBody JSONObject jsonParam){
@@ -42,7 +48,11 @@ public class LoginContruller {
 //        System.out.println(login.toString());
 
         if(login != null && login.getUserpassword().equals(password) && login.getNusertype().intValue()==role){
-            return "success";
+            if(role == 2){//表示客户（购买者）
+                return "success0";
+            }else{//表示商家或管理员
+                return "success1";
+            }
         }
         return "error";
     }

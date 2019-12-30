@@ -75,7 +75,7 @@
       });
       //监听提交
       form.on('submit(login_hash)', function(data) {
-        var json=JSON.stringify(data.field)
+        var json=JSON.stringify(data.field);
 
         $.ajax({
           url:"login2",
@@ -86,8 +86,10 @@
           success:function (result) {
             if(result == "error"){
               layer.msg("账号或密码错误");
-            }else{
+            }else if (result == "success1"){
               location.href="index";
+            }else if (result == "success0"){
+              location.href="customer/index";
             }
           },
           complete:function(XMLHttpRequest,textStatus){
